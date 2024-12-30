@@ -1,0 +1,36 @@
+#include"motor.inc"
+module motor{
+	reg count[31]=31'b0;
+	reg pwm=1'b0;
+	
+	power=pwm;
+	if(sw==0){
+		if(count<=CCW){
+			pwm:=0b1;
+		}
+		if(count<FULL&&count>CCW){
+			pwm:=0b0;
+		}
+	}else if(sw==1||sw==2){
+		if(count<=STOP){
+			pwm:=0b1;
+		}
+		if(count<FULL&&count>STOP){
+			pwm:=0b0;
+		}
+	}else{
+		if(count<=CW){
+			pwm:=0b1;
+		}
+		if(count<FULL&&count>CW){
+			pwm:=0b0;
+		}
+	}
+		if(count==FULL){
+			count:=1;
+			
+		}else{
+			count++;
+		}
+	
+}
