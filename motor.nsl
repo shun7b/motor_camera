@@ -2,29 +2,50 @@
 module motor{
 	reg count[31]=31'b0;
 	reg pwm=1'b0;
-	
+	reg LED[4]=4'b0;
+	reg in_botan[31]=31'b0;
 	power=pwm;
-	if(sw==0){
+	HEX=LED;
+	HEXpwm=in_botan[3:0];
+	HEXpwm1=in_botan[7:4];
+	
+	HEXpwm2=in_botan[11:8];
+	HEXpwm3=in_botan[15:12];
+	
+	HEXpwm4=in_botan[19:16];
+	
+	HEXpwm5=in_botan[23:20];
+	if(count==FULL&&push==0){
+		in_botan:=in_botan+128;
+	}
+	if(sw==1){
 		if(count<=CCW){
 			pwm:=0b1;
 		}
 		if(count<FULL&&count>CCW){
 			pwm:=0b0;
 		}
-	}else if(sw==1||sw==2){
-		if(count<=STOP){
+		LED:=1;
+	}else if((sw==0)||(sw==3)){
+		if(count<=(31'(STOP)+in_botan)){
 			pwm:=0b1;
 		}
-		if(count<FULL&&count>STOP){
+		if(count<FULL&&count>(31'(STOP)+in_botan)){
 			pwm:=0b0;
 		}
-	}else{
+		if(sw==0){
+			LED:=0;
+		}else if(sw==3){
+			LED:=3;
+		}
+	}else if(sw==2){
 		if(count<=CW){
 			pwm:=0b1;
 		}
 		if(count<FULL&&count>CW){
 			pwm:=0b0;
 		}
+		LED:=2;
 	}
 		if(count==FULL){
 			count:=1;
@@ -32,5 +53,4 @@ module motor{
 		}else{
 			count++;
 		}
-	
 }

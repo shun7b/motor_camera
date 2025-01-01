@@ -8,6 +8,7 @@ module cam_test{
     camera camera_out[2];
    vram vram_x[6];
     motor motor_x[2];
+    reg motor_light[2]=2'b0;
     reg motor_sw[2]=2'b0;
     reg VGA_plot_num_x[32]=32'b0;
     reg VGA_plot_num_y[32]=32'b0;
@@ -15,16 +16,35 @@ module cam_test{
     wire plot_num[32];
     wire plot_nums[32];
     reg plot_num_y[32]=32'b0;
-
+    reg wait_motor[10]=10'b0;
     reg VGA_plot_num_x2[32]=32'b0;
     reg VGA_plot_num_y2[32]=32'b0;
     reg plot_num_x2[32]=32'b0;
     wire plot_num2[32];
     wire plot_nums2[32];
     reg plot_num_y2[32]=32'b0;
-
+    mem encode[16][8]={0b00111111,0b00000110,
+	0b01011011,0b01001111,
+	0b01100110,0b01101101,
+	0b01111101,0b00100111,
+	0b01111111,0b01101111,
+    0b01110111,0b01111100,
+	0b00111001,0b01011110,
+	0b01111001,0b01110001};
+    motor_x[0].push=push;
+    motor_x[1].push=push;
     VGA_VS=VGA_out.VGA_VS;
-    HEX0=VGA_out.HEX0;   
+    //HEX0=VGA_out.HEX0;
+    
+    //HEX1=~encode[motor_x[0].HEX];
+    
+    //HEX2=~encode[motor_x[1].HEX];
+    HEX0=~encode[motor_x[1].HEXpwm];
+    HEX1=~encode[motor_x[1].HEXpwm1];
+    HEX2=~encode[motor_x[1].HEXpwm2];
+    HEX3=~encode[motor_x[1].HEXpwm3];
+    HEX4=~encode[motor_x[1].HEXpwm4];
+    HEX5=~encode[motor_x[1].HEXpwm5];
     VGA_HS=VGA_out.VGA_HS;
    
     xclk=camera_out[0].xclk;
@@ -94,7 +114,17 @@ plot_num_y2:=(32'(camera_out[1].out_plot_num_y))<<7;
         VGA_B=vram_x[0].q;
         VGA_G=vram_x[1].q;
         VGA_R=vram_x[2].q;
-        motor_sw:={0b0,((vram_x[0].q<3)&&(vram_x[1].q<3)&&(vram_x[2].q<3))};
+        if((VGA_out.plot_num_x-7)==0&&VGA_out.plot_num_y>=0){
+            if(wait_motor==19){
+                wait_motor:=0;
+            }else{
+                wait_motor++;
+            }
+            motor_light:={0b0,~(((vram_x[0].q<4)&&(vram_x[1].q<4)&&(vram_x[2].q<4)))};
+            motor_sw:=motor_light;
+        }else{
+            motor_light:={0b0,(~(((vram_x[0].q<4)&&(vram_x[1].q<4)&&(vram_x[2].q<4)))&motor_light[0])};
+        }
     }else if((VGA_out.plot_num_x-7)>=128&&(VGA_out.plot_num_x-7)<256&&(VGA_out.plot_num_y>=128)&&VGA_out.plot_num_y<256){
         plot_nums=32'((32'(VGA_plot_num_x))+(32'((32'(VGA_plot_num_y)))));       
         vram_x[3].rdaddress=plot_nums[13:0];
@@ -103,6 +133,7 @@ plot_num_y2:=(32'(camera_out[1].out_plot_num_y))<<7;
         VGA_B=vram_x[3].q;
         VGA_G=vram_x[4].q;
         VGA_R=vram_x[5].q;
+        motor_sw:={0b0,(~(((vram_x[3].q<4)&&(vram_x[4].q<4)&&(vram_x[5].q<4)))&motor_sw[0])};
     }else{
         VGA_R=0x0;
         VGA_G=0x0;
