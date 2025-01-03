@@ -140,7 +140,7 @@ plot_num_y2:=(32'(camera_out[1].out_plot_num_y))<<7;
         VGA_B=0x0;
     }
     motor_x[0].sw=motor_sw;
-    motor_sig=motor_x[0].power;
+    motor_sig=motor_x[1].power;
     motor_x[1].sw=~motor_sw;
-    motor_sig2=motor_x[1].power;
+    motor_sig2=motor_x[0].power;
 }

@@ -1,5 +1,5 @@
 
-/*Produced by NSL Core(version=20240708), IP ARCH, Inc. Wed Jan  1 22:24:17 2025
+/*Produced by NSL Core(version=20240708), IP ARCH, Inc. Thu Jan  2 00:10:23 2025
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -248,6 +248,7 @@ R vram_x_1 ( .data(_vram_x_1_data),.inclock(pclk),.outclock(m_clock), .rdaddress
 B1 vram_x_3 ( .data(_vram_x_3_data),.inclock(pclk2),.outclock(m_clock), .rdaddress(_vram_x_3_rdaddress), .wraddress(_vram_x_3_wraddress), .wren(_vram_x_3_wren), .q(_vram_x_3_q));
 G1 vram_x_5 ( .data(_vram_x_5_data),.inclock(pclk2),.outclock(m_clock), .rdaddress(_vram_x_5_rdaddress), .wraddress(_vram_x_5_wraddress), .wren(_vram_x_5_wren), .q(_vram_x_5_q));
 R1 vram_x_4 ( .data(_vram_x_4_data),.inclock(pclk2),.outclock(m_clock), .rdaddress(_vram_x_4_rdaddress), .wraddress(_vram_x_4_wraddress), .wren(_vram_x_4_wren), .q(_vram_x_4_q));
+
 camera camera_out (.m_clock(m_clock), .p_reset( p_reset), .out_plot_num_y(_camera_out_out_plot_num_y), .out_plot_num_x(_camera_out_out_plot_num_x), .time_RGB(_camera_out_time_RGB), .VGA_R(_camera_out_VGA_R), .VGA_B(_camera_out_VGA_B), .VGA_G(_camera_out_VGA_G), .sda(_camera_out_sda), .scl(_camera_out_scl), .reset(_camera_out_reset), .pwdn(_camera_out_pwdn), .c_vsync(_camera_out_c_vsync), .xclk(_camera_out_xclk), .pclk(_camera_out_pclk), .href(_camera_out_href), .in_data(_camera_out_in_data));
 camera camera_out_1 (.m_clock(m_clock), .p_reset( p_reset), .out_plot_num_y(_camera_out_1_out_plot_num_y), .out_plot_num_x(_camera_out_1_out_plot_num_x), .time_RGB(_camera_out_1_time_RGB), .VGA_R(_camera_out_1_VGA_R), .VGA_B(_camera_out_1_VGA_B), .VGA_G(_camera_out_1_VGA_G), .sda(_camera_out_1_sda), .scl(_camera_out_1_scl), .reset(_camera_out_1_reset), .pwdn(_camera_out_1_pwdn), .c_vsync(_camera_out_1_c_vsync), .xclk(_camera_out_1_xclk), .pclk(_camera_out_1_pclk), .href(_camera_out_1_href), .in_data(_camera_out_1_in_data));
 VGA VGA_out (.m_clock(m_clock), .p_reset( p_reset), .VGA_RI(_VGA_out_VGA_RI), .VGA_R(_VGA_out_VGA_R), .VGA_B(_VGA_out_VGA_B), .VGA_G(_VGA_out_VGA_G), .VGA_VS(_VGA_out_VGA_VS), .VGA_HS(_VGA_out_VGA_HS), .HEX0(_VGA_out_HEX0), .plot_num_x(_VGA_out_plot_num_x), .plot_num_y(_VGA_out_plot_num_y));
@@ -740,8 +741,8 @@ _net_18
    assign  scl2 = _camera_out_1_scl;
    assign  reset2 = _camera_out_1_reset;
    assign  pwdn2 = _camera_out_1_pwdn;
-   assign  motor_sig = _motor_x_power;
-   assign  motor_sig2 = _motor_x_1_power;
+   assign  motor_sig = _motor_x_1_power;
+   assign  motor_sig2 = _motor_x_power;
 
 // synthesis translate_off
 // synopsys translate_off
@@ -1013,5 +1014,5 @@ initial begin
 end
 endmodule
 
-/*Produced by NSL Core(version=20240708), IP ARCH, Inc. Wed Jan  1 22:24:17 2025
+/*Produced by NSL Core(version=20240708), IP ARCH, Inc. Thu Jan  2 00:10:23 2025
  Licensed to :EVALUATION USER*/
