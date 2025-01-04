@@ -5,6 +5,6 @@
 <br>カメラを２台使った。(VGAで確認できる)
 <br>カメラが２台とも明るい場合動くようにした。
 <br>モーターを２つ使った。(VCC 5V)
-<br>GPIOのPIN配置はcam_tets.qsfで設定した。
+<br>GPIOのPIN配置はcam_test.qsfで設定した。
 
 
