@@ -6,5 +6,6 @@
 <br>カメラが２台とも明るい場合動くようにした。
 <br>モーターを２つ使った。(VCC 5V)
 <br>GPIOのPIN配置はcam_test.qsfで設定した。
+<img width="1222" height="578" alt="image" src="https://github.com/user-attachments/assets/48814b14-b630-49fb-9440-7549c4c7f501" />
 
 
