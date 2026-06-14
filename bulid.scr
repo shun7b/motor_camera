@@ -1,0 +1,3 @@
+#!/bin/bash
+$NSL/nsl2vl motor.nsl -neg_res
+
